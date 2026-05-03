@@ -9,7 +9,7 @@ description: '描述栏'
 keywords:
 author: 李上岸叭叭叭
 language: ZH-CN
-timezone: '2336'
+timezone: Asia/Shanghai
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
