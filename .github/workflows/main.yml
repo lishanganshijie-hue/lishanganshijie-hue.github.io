@@ -1,8 +1,8 @@
 name: Deploy Hexo to GitHub Pages
 
-on:
+于:
   push:
-    branches:
+    分支:
       - main # 或你使用的默认分支名称
 
 jobs:
@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout blog source
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: blog
 
