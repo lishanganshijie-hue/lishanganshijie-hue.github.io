@@ -1,0 +1,40 @@
+name: Deploy Hexo Blog
+
+on:
+  push:
+    branches:
+      - source # 监听咱们的源码分支
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出源码
+        uses: actions/checkout@v4
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # 使用较新的 Node 版本
+
+      - name: 缓存依赖
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+      - name: 安装依赖
+        run: npm install
+
+      - name: 生成静态网页
+        run: |
+          npx hexo clean
+          npx hexo generate
+
+      - name: 部署到 main 分支展示
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: main # 把生成的网页放到 main 分支
+          commit_message: "Auto deploy from Qexo"
