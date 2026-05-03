@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - source # 监听咱们的源码分支
+  workflow_dispatch: # 🌟顺手加上这行，以后 Actions 页面就会出现手动运行按钮啦！
 
 jobs:
   build:
@@ -11,11 +12,13 @@ jobs:
     steps:
       - name: 检出源码
         uses: actions/checkout@v4
+        with:
+          submodules: true # 🌟把主题子模块也拉下来
 
       - name: 安装 Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # 使用较新的 Node 版本
+          node-version: '20'
 
       - name: 缓存依赖
         uses: actions/cache@v4
@@ -30,11 +33,12 @@ jobs:
         run: |
           npx hexo clean
           npx hexo generate
+          ls -la public # 🌟增加一行日志，方便我们偷窥它到底生成了啥
 
       - name: 部署到 main 分支展示
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          publish_branch: main # 把生成的网页放到 main 分支
+          publish_branch: main
           commit_message: "Auto deploy from Qexo"
