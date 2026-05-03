@@ -13,7 +13,7 @@ copyright_author_href: null
 copyright_info: null
 copyright_url: null
 cover: https://img.090227.xyz/file/ae62475a131f3734a201c.png
-date: '2026-05-04T00:35:09.375335+08:00'
+date: 2026-05-04 00:35:09
 description: null
 highlight_shrink: null
 katex: null
@@ -29,7 +29,7 @@ toc_style_simple: null
 top: null
 top_group_index: 10
 top_img: null
-updated: '2026-05-04T01:04:01.980+08:00'
+updated: 2026-05-04 01:04:01
 ---
 <div class="video-container">
 <iframe width="939" height="528" src="https://www.youtube.com/embed/LpkLcTg8vPE" title="第四期：给静态博客加装后台，手机平板就能发布文章！Qexo 一个美观、强大的在线 静态博客 管理器Hexo、Hugo、Valaxy 托管商 Github、Gitlab、本地/cloudflare免费" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
