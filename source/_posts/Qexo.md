@@ -83,9 +83,57 @@ updated: '2026-05-05T01:19:02.061+08:00'
 
 3. 输入以下 YAML 配置并点击 **Start commit** ：
 
+```
+name: Deploy Hexo to GitHub Pages
 
-| `name: Deploy Hexo to GitHub Pages`<br/>`on:`<br/>`  push:`<br/>`    branches:`<br/>`      - master # 或你使用的默认分支名称`<br/>`jobs:`<br/>`  deploy:`<br/>`    runs-on: ubuntu-latest`<br/>`    steps:`<br/>`      - name: Checkout blog source`<br/>`        uses: actions/checkout@v2`<br/>`        with:`<br/>`          path: blog`<br/>`      - name: Set up Node.js`<br/>`        uses: actions/setup-node@v1`<br/>`        with:`<br/>`          node-version: "16" # 设置 Node.js 版本`<br/>`      - name: Cache dependencies`<br/>`        uses: actions/cache@v2`<br/>`        with:`<br/>`          path: node_modules`<br/>`          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}`<br/>`          restore-keys: |`<br/>`            ${{ runner.os }}-node-`<br/>`      - name: Install dependencies`<br/>`        run: npm install`<br/>`        working-directory: ./blog`<br/>`      - name: Install Hexo CLI`<br/>`        run: npm install -g hexo-cli`<br/>`        working-directory: ./blog`<br/>`      - name: Generate static pages`<br/>`        run: hexo generate`<br/>`        working-directory: ./blog`<br/>`      - name: Deploy to GitHub Pages`<br/>`        uses: peaceiris/actions-gh-pages@v3`<br/>`        with:`<br/>`          personal_token: ${{ secrets.PERSONAL_TOKEN }}`<br/>`          publish_dir: ./blog/public`<br/>`          external_repository: username/username.github.io # 更改为你的 GitHub Pages 仓库, username 是你的用户名`<br/>`          publish_branch: main # GitHub Pages 分支`<br/> |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+on:
+  push:
+    branches:
+      - master # 或你使用的默认分支名称
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout blog source
+        uses: actions/checkout@v2
+        with:
+          path: blog
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16" # 设置 Node.js 版本
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./blog
+
+      - name: Install Hexo CLI
+        run: npm install -g hexo-cli
+        working-directory: ./blog
+
+      - name: Generate static pages
+        run: hexo generate
+        working-directory: ./blog
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          publish_dir: ./blog/public
+          external_repository: username/username.github.io # 更改为你的 GitHub Pages 仓库, username 是你的用户名
+          publish_branch: main # GitHub Pages 分支
+```
 
 参考文档：
 
